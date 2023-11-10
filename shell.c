@@ -26,7 +26,7 @@ int main(int ac, char **av, char **env)
 			perror("Error");
 		else if (pid == 0)
 		{
-			if(execve(splits[0], splits, NULL) == -1)
+			if (execve(splits[0], splits, NULL) == -1)
 			{
 				perror(av[0]);
 			}

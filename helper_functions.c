@@ -1,6 +1,42 @@
 #include "main.h"
 
 /**
+ * _strlen - returns the length of a string.
+ * @s: input string.
+ * Return: length of a string.
+ */
+size_t _strlen(const char *s)
+{
+	int count = 0;
+
+	while (*(s + count) != '\0')
+		count++;
+	return (count);
+}
+
+/**
+ * _strcpy - copies the string pointed to by src,
+ * including the terminating null byte, to the
+ * buffer pointed to by dest.
+ * @dest: destination.
+ * @src: source.
+ * Return: the pointer to dest.
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int count = 0;
+
+	while (count >= 0)
+	{
+		*(dest + count) = *(src + count);
+		if (*(src + count) == '\0')
+			break;
+		count++;
+	}
+	return (dest);
+}
+
+/**
  * _strdup - copies the string pointed to by src,
  * including the terminating null byte, to a
  * buffer pointed to by dest.
@@ -75,6 +111,7 @@ char **split_str(char *str)
 
 	int i;
 	char *t;
+
 	t = strtok(string1, " ");
 
 	for (i = 0; i < count; i++)
@@ -90,37 +127,3 @@ char **split_str(char *str)
 
 	return (arr);
 }
-
-/**
- * _getenv - gets value of env
- * @name: variable name
- *
- * Return: pointer to env value
- */
-char *_getenv(const char *name)
-{
-	extern char **environ;
-	char *token, *dup, *str = "(null)";
-	int i = 0;
-
-	while (environ[i])
-	{
-		/* duplicate env string */
-		dup = _strdup(environ[i]);
-
-		/* tokenise dup string */
-		token = strtok(dup, "=");
-
-		/* compare name to token & return match */
-		if (_strcmp(name, token) == 0)
-		{
-			token = strtok(NULL, "=");
-
-			return (token);
-		}
-		i++;
-	}
-
-	return (str);
-}
-
