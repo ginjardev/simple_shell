@@ -18,7 +18,7 @@ int main(int ac, char **av, char **env)
 	{
 		input = prompt();
 		duplicate = strdup(input);
-		splits = strings(duplicate);
+		splits = split_str(duplicate);
 
 		pid = fork();
 
