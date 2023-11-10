@@ -52,3 +52,42 @@ int _strcmp(char *s1, char *s2)
 
 	return (res);
 }
+
+/**
+ * split_str - splits string and returns array of strings
+ * @str - string parameter
+ * Return: array of strings
+ */
+char **split_str(char *str)
+{
+	char *string = strdup(str);
+	char *string1 = strdup(str);
+	char *token = strtok(string, " ");
+	int count = 0;
+
+	while (token != NULL)
+	{
+		++count;
+		token = strtok(NULL, " ");
+	}
+
+	char **arr = malloc(sizeof(char *) * count + 1);
+
+	int i;
+	char *t;
+	t = strtok(string1, " ");
+
+	for (i = 0; i < count; i++)
+	{
+		if (t != NULL)
+		{
+			arr[i] = malloc(sizeof(char *) * strlen(t));
+			arr[i] = t;
+		}
+
+		t = strtok(NULL, " ");
+	}
+
+	return (arr);
+}
+
