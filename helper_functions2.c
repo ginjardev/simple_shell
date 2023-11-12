@@ -6,15 +6,15 @@
  *
  * Return: pointer to env value
  */
-char *_getenv(const char *name, char **env)
+char *_getenv(const char *name)
 {
 	char *token, *dup, *str = "(null)";
 	int i = 0;
 
-	while (env[i])
+	while (environ[i])
 	{
 		/* duplicate env string */
-		dup = _strdup(env[i]);
+		dup = _strdup(environ[i]);
 
 		/* tokenise dup string */
 		token = strtok(dup, "=");
