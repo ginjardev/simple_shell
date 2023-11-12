@@ -15,6 +15,6 @@ size_t _strlen(const char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *src);
 int _strcmp(char *s1, char *s2);
-char *_getenv(const char *name);
+char *_getenv(const char *name, char **env);
 
 #endif
