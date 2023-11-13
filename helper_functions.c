@@ -91,7 +91,7 @@ int _strcmp(char *s1, char *s2)
 
 /**
  * split_str - splits string and returns array of strings
- * @str - string parameter
+ * @str: string parameter
  * Return: array of strings
  */
 char **split_str(char *str)

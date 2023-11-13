@@ -5,10 +5,11 @@
  * @ac: argument count
  * @av: argument vector
  * @env: environment variable
+ * Return: 0
  */
 int main(int ac, char **av, char **env)
 {
-	char *input, *token, *duplicate;
+	char *input, *token, *duplicate, *command;
 	char **splits;
 	size_t size;
 	int status;
@@ -26,6 +27,8 @@ int main(int ac, char **av, char **env)
 			perror("Error");
 		else if (pid == 0)
 		{
+			command = get_addy(splits[0]);
+
 			if (execve(splits[0], splits, NULL) == -1)
 			{
 				perror(av[0]);
