@@ -1,6 +1,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +20,6 @@ size_t _strlen(const char *s);
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *src);
 int _strcmp(char *s1, char *s2);
-char *_getenv(const char *name);
-char *get_addy(char *command)
+char *_getenv(char *name);
+char *get_addy(char *command);
 #endif

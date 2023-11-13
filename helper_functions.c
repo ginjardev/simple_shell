@@ -45,7 +45,8 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strdup(const char *src)
 {
-	int length = 0;
+	int i, length = 0;
+	char *dest;
 
 	/*strlen*/
 	while (src[length] != '\0')
@@ -53,14 +54,14 @@ char *_strdup(const char *src)
 		length++;
 	}
 
-	char *dest = (char *)malloc(length + 1);
+	dest = (char *)malloc(length + 1);
 
 	if (dest == NULL)
 	{
 		return (NULL);
 	}
 	/*copy chars of src into dest*/
-	for (int i = 0; i <= length; i++)
+	for (i = 0; i <= length; i++)
 	{
 		dest[i] = src[i];
 	}
@@ -99,7 +100,9 @@ char **split_str(char *str)
 	char *string = _strdup(str);
 	char *string1 = _strdup(str);
 	char *token = strtok(string, " ");
-	int count = 0;
+	int count = 0, i;
+	char *t;
+	char **arr;
 
 	while (token != NULL)
 	{
@@ -107,10 +110,7 @@ char **split_str(char *str)
 		token = strtok(NULL, " ");
 	}
 
-	char **arr = malloc(sizeof(char *) * count + 1);
-
-	int i;
-	char *t;
+	arr = malloc(sizeof(char *) * count + 1);
 
 	t = strtok(string1, " ");
 

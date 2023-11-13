@@ -6,7 +6,7 @@
  *
  * Return: pointer to env value
  */
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
 	char *token, *dup, *str = "(null)";
 	int i = 0;
