@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <string.h>
+#include <limlits.h>
 
 extern char **environ
 
