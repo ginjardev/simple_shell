@@ -7,7 +7,7 @@
  */
 char *prompt(void)
 {
-	char *buffer;
+	char *buffer = NULL;
 	size_t size;
 	int count = 1;
 

@@ -73,7 +73,7 @@ char *get_addy(char *command)
 
 		free(path_dup);
 		if (stat(command, &st) == 0)
-			return (command);
+			return (_strdup(command));
 
 		return (NULL);
 	}

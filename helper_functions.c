@@ -124,6 +124,7 @@ char **split_str(char *str)
 
 		t = strtok(NULL, " ");
 	}
+	arr[count] = NULL;
 
 	return (arr);
 }
