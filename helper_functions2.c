@@ -80,3 +80,13 @@ char *get_addy(char *command)
 	return (NULL);
 }
 
+/**
+ * exit_sh - exits shell
+ *
+ * Return: 0
+ */
+int exit_sh(void)
+{
+	return (0);
+}
+
