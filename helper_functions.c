@@ -98,10 +98,8 @@ int _strcmp(char *s1, char *s2)
 char **split_str(char *str)
 {
 	char *string = _strdup(str);
-	char *string1 = _strdup(str);
-	char *token = strtok(string, " ");
+	char *t, *token = strtok(string, " ");
 	int count = 0, i;
-	char *t;
 	char **arr;
 
 	while (token != NULL)
@@ -110,21 +108,22 @@ char **split_str(char *str)
 		token = strtok(NULL, " ");
 	}
 
-	arr = malloc(sizeof(char *) * count + 1);
-
-	t = strtok(string1, " ");
+	arr = malloc(sizeof(char *) * (count + 1));
+	t = strtok(str, " ");
 
 	for (i = 0; i < count; i++)
 	{
 		if (t != NULL)
 		{
-			arr[i] = malloc(sizeof(char *) * strlen(t));
-			arr[i] = t;
+			arr[i] = _strdup(t);
 		}
 
 		t = strtok(NULL, " ");
 	}
 	arr[count] = NULL;
 
+	free(string);
+
 	return (arr);
 }
+
