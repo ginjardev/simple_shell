@@ -12,8 +12,24 @@
 #include <string.h>
 #include <limits.h>
 
+/**
+ * struct builtin - struct of commands & function pointers
+ * @command: user command
+ * @func: function pointer
+ */
+typedef struct builtin
+{
+	char *command;
+	int (*func)();
+} Builtin;
+
 extern char **environ;
 
+int _env(void);
+int (*get_builtin(char *str))(char **av);
+int exec_all(char *command, char **av);
+int exec_command(char *command, char **av);
+int exit_sh(void);
 char **split_str(char *str);
 char *prompt(void);
 size_t _strlen(const char *s);
@@ -22,4 +38,6 @@ char *_strdup(const char *src);
 int _strcmp(char *s1, char *s2);
 char *_getenv(char *name);
 char *get_addy(char *command);
+int cd_dir(char **av);
 #endif
+
