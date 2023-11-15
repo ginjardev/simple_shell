@@ -15,6 +15,9 @@ char *prompt(void)
 	while (count == 1)
 	{
 		write(1, prompt, 6);
+
+		free(buffer);
+
 		count = getline(&buffer, &size, stdin);
 
 		if (count == -1)

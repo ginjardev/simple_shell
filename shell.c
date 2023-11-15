@@ -21,6 +21,7 @@ int main(int ac, char **av)
 		command = av[0];
 
 		check = exec_all(command, av);
+		free(input);
 	}
 
 	return (0);
