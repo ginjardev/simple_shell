@@ -16,6 +16,11 @@ int main(int ac, char **av)
 	while (check)
 	{
 		input = prompt();
+		if (input == NULL)
+		{
+			free(input);
+			break;
+		}
 		duplicate = strdup(input);
 		av = split_str(duplicate);
 		command = av[0];
