@@ -31,11 +31,11 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 - A README.md file, at the root of the folder of the project is mandatory
 - Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
 - Your shell should not have any memory leaks
-No more than 5 functions per file
-All your header files should be include guarded
-Use system calls only when you need to (why?)
-Write a README with the description of your project
-You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see Docker
+- No more than 5 functions per file
+- All your header files should be include guarded
+- Use system calls only when you need to (why?)
+- Write a README with the description of your project
+- You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. - - Format, see Docker
 
 ## Authors
 Ini Arthur and Michael Megbenu
