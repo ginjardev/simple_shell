@@ -38,6 +38,7 @@ At the end of this project, you are expected to be able to explain to anyone, wi
 - You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. - - Format, see Docker
 
 ## Authors
-Ini Arthur and Michael Megbenu
+- Ini Arthur
+- Michael Megbenu
 
 &copy; 2023
