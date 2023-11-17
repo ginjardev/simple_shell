@@ -10,23 +10,31 @@
 int exec_command(char *command, char **av)
 {
 	pid_t pid;
-	int status;
+	int status, wstat;
 
 	pid = fork();
 
 	if (pid == -1)
-		perror("Error");
+	{
+		perror("Error ");
+		exit(EXIT_FAILURE);
+	}
 	else if (pid == 0)
 	{
-		command = get_addy(command);
+		/*
+		 * command = get_addy(command);
+		*/
 
 		if (execve(command, av, environ) == -1)
 			perror(av[0]);
 	}
 	else
+	{
 		wait(&status);
-
-	return (1);
+		if (WIFEXITED(wstat))
+			status = WEXITSTATUS(wstat);
+	}
+	return (status);
 }
 
 /**
@@ -40,7 +48,7 @@ int (*get_builtin(char *str))(char **av)
 	int counter = 0;
 
 	Builtin arr[] = {
-		{"exit", exit_sh},
+		/*{"exit", exit_sh},*/
 		{"cd", cd_dir},
 		{"env", _env},
 		{NULL, NULL}
@@ -58,15 +66,19 @@ int (*get_builtin(char *str))(char **av)
 
 /**
  * exec_all - executes user commands
- * @command: user command
+ * @stream: user input
  * @av: argument vector
- *
+ * @ac: command counter.
  * Return: 0 on success
  */
 
-int exec_all(char *command, char **av)
+int exec_all(char *stream[], char **av, int ac)
 {
 	int (*function)(char **av);
+	char *acstr = itoa(ac);
+	char *init_str = stream[0];
+	char *command = get_addy(init_str);
+	int status = 0;
 
 	if (av[0] == NULL)
 		return (1);
@@ -75,8 +87,26 @@ int exec_all(char *command, char **av)
 
 	if (function != NULL)
 		return (function(av));
+	else if (command != NULL)
+	{
+		if (_strcmp(command, stream[0]) == 0)
+		{
+			status = exec_command(command, stream);
+			free(command);
+		}
+		else
+		{
+			status = exec_command(command, stream);
+		}
+		free(acstr);
+		return (status);
+	}
 	else
-		return (exec_command(command, av));
+	{
+		fprintf(stderr, "%s%s%s%s%s%s%s", av[0], ": ", acstr,
+		 ": ", stream[0], ": ", "not found\n");
+		status = 127;
+	}
 }
 
 /**

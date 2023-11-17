@@ -1,6 +1,97 @@
 #include "main.h"
 
 /**
+ * space_check - will check if there are spaces in string
+ * @str: string to be checked.
+ * Return: true or false.
+ */
+
+int space_check(const char *str)
+{
+	int is_space = 1;
+
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t' && *str != '\n' && *str != '\v' &&
+			*str != '\f' && *str != '\r')
+		{
+			is_space = 0;
+			break;
+		}
+		str++;
+	}
+	return (is_space);
+}
+
+/**
+ * itoa - convert integer to string.
+ * @num: the integer to ocnvert.
+ * Return: a string.
+ */
+char *itoa(int num)
+{
+	int temp_num = num, no_dig = (num == 0) ? 1 : ((num < 0) ? 2 : 1);
+
+	while (temp_num /= 10)
+		no_dig++;
+
+	char *str = malloc(no_dig + 1);
+
+	if (!str)
+		return (NULL);
+
+	str[no_dig] = '\0';
+	temp_num = (num < 0) ? -num : num;
+
+	while (no_dig-- > (num < 0))
+	{
+		str[no_dig] = temp_num % 10 + '0';
+		temp_num /= 10;
+	}
+
+	if (num < 0)
+		str[0] = '-';
+
+	return (str);
+}
+
+
+/**
+ * _atoi - converts a string to an integer.
+ * @s: input string.
+ * Return: integer.
+ */
+int _atoi(char *s)
+{
+	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
+
+	while (*(s + count) != '\0')
+	{
+		if (size > 0 && (*(s + count) < '0' || *(s + count) > '9'))
+			break;
+
+		if (*(s + count) == '-')
+			pn *= -1;
+
+		if ((*(s + count) >= '0') && (*(s + count) <= '9'))
+		{
+			if (size > 0)
+				m *= 10;
+			size++;
+		}
+		count++;
+	}
+
+	for (i = count - size; i < count; i++)
+	{
+		oi = oi + ((*(s + i) - 48) * m);
+		m /= 10;
+	}
+	return (oi * pn);
+}
+
+
+/**
  * _getenv - gets value of env
  * @name: variable name
  *
@@ -38,7 +129,7 @@ char *_getenv(char *name)
  */
 char *get_addy(char *command)
 {
-	char *path, *path_dup, *token, *comm_path;
+	char *path, *path_dup, *token, *comm_path = NULL;
 	int comm_length, dir_length;
 	struct stat st;
 
@@ -46,47 +137,43 @@ char *get_addy(char *command)
 
 	if (path)
 	{
-		path_dup = strdup(path);
-		comm_length = strlen(command);
-
+		path_dup = _strdup(path);
+		if (access(command, X_OK) == 0)
+		{
+			free(path_dup);
+			return (command);
+		}
+		comm_length = _strlen(command);
 		token = strtok(path_dup, ":");
 		while (token)
 		{
-			dir_length = strlen(token);
+			dir_length = _strlen(token);
 			comm_path = malloc(comm_length + dir_length + 2);
-			strcpy(comm_path, token);
+			_strcpy(comm_path, token);
 			strcat(comm_path, "/");
 			strcat(comm_path, command);
-			strcat(comm_path, "\0");
-
+			/*_strcat(comm_path, "\0");*/
 			if (stat(comm_path, &st) == 0)
 			{
 				free(path_dup);
 				return (comm_path);
 			}
-			else
-			{
-				free(comm_path);
-				token = strtok(NULL, ":");
-			}
+			free(comm_path);
+			token = strtok(NULL, ":");
 		}
-
 		free(path_dup);
-		if (stat(command, &st) == 0)
-			return (_strdup(command));
-
+	}
+	else if (path == NULL || path_dup == NULL)
+	{
+		free(path_dup);
 		return (NULL);
 	}
-	return (NULL);
+return (NULL);
 }
 
-/**
+/*
+ * REMOVED
  * exit_sh - exits shell
- *
  * Return: 0
  */
-int exit_sh(void)
-{
-	return (0);
-}
 

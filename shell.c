@@ -10,25 +10,34 @@
 int main(int ac, char **av)
 {
 	int check = 1;
-	char *input, *duplicate, *command;
-	(void) ac;
+	char *stream = NULL;
+	char **tokens, *command;
+	int stat = 0;
 
 	while (check)
 	{
-		input = prompt();
-		if (input == NULL)
+		prompt();
+		stream = get_stream(stream, stat);
+
+		if (space_check(stream))
 		{
-			free(input);
-			break;
+			free(stream);
+			continue;
 		}
-		duplicate = strdup(input);
-		av = split_str(duplicate);
-		command = av[0];
 
-		check = exec_all(command, av);
-		free(input);
+		tokens = malloc(sizeof(char *) * 1024);
+		tokens = split_str(stream);
+
+		if (_strcmp(tokens[0], "exit") == 0)
+			stat = endof(tokens, stream, av, ac, stat);
+		else
+			stat = exec_all(tokens, av, ac);
+		ac++;
+		mem_free(tokens, stream);
+		/*
+		* completely edited: see original
+		*/
 	}
-
-	return (0);
+	return (stat);
 }
 

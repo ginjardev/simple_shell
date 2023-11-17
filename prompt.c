@@ -1,29 +1,21 @@
 #include "main.h"
 
 /**
- * prompt - prompts user
- *
+ * prompt - prompts user for input
  * Return: string read from cli
  */
-char *prompt(void)
+void prompt(void)
 {
-	char *buffer = NULL;
-	size_t size;
-	int count = 1;
-	char *prompt = "(^_*) ";
+	ssize_t bytes;
+	char *prompt = "$ ";
 
-	write(1, prompt, 6);
-	count = getline(&buffer, &size, stdin);
-
-	if (count == -1 || count == 0)
+	if (isatty(0))
 	{
-		free(buffer);
-		return (NULL);
+		bytes = write(STDOUT_FILENO, prompt, 2);
+		if (bytes == -1)
+		{
+			perror("Error");
+			exit(EXIT_FAILURE);
+		}
 	}
-
-	if (count > 1 && buffer[count - 1] == '\n')
-		buffer[count - 1] = '\0';
-
-	return (buffer);
 }
-
