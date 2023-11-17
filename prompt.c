@@ -12,7 +12,10 @@ char *prompt(void)
 	int count = 1;
 	char *prompt = "(^_*) ";
 
-	write(1, prompt, 6);
+	if (isatty(0))
+	{
+		write(1, prompt, 6);
+	}
 	count = getline(&buffer, &size, stdin);
 
 	if (count == -1 || count == 0)
