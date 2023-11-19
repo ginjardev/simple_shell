@@ -29,6 +29,7 @@ int main(int ac, char **av)
 		free(input);
 		free(duplicate);
 		free(av);
+		free(command);
 	}
 
 	return (0);
