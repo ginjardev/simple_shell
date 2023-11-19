@@ -21,12 +21,14 @@ int main(int ac, char **av)
 			free(input);
 			break;
 		}
-		duplicate = strdup(input);
+		duplicate = _strdup(input);
 		av = split_str(duplicate);
 		command = av[0];
 
 		check = exec_all(command, av);
 		free(input);
+		free(duplicate);
+		free(av);
 	}
 
 	return (0);
