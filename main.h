@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <limits.h>
+#include <signal.h>
 
 /**
  * struct builtin - struct of commands & function pointers
