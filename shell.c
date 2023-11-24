@@ -9,7 +9,7 @@
  */
 int main(int ac, char **av)
 {
-	int check = 1;
+	int i, check = 1;
 	char *input, *duplicate, *command;
 	(void) ac;
 
@@ -26,10 +26,13 @@ int main(int ac, char **av)
 		command = av[0];
 
 		check = exec_all(command, av);
-		free(input);
+		/*free(input);
 		free(duplicate);
-		free(av);
-		free(command);
+
+		for (i = 0; av[i]; i++)
+			free(av[i]);
+
+		free(av); */
 	}
 
 	return (0);
