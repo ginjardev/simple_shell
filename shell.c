@@ -13,6 +13,8 @@ int main(int ac, char **av)
 	char *input, *duplicate, *command;
 	(void) ac;
 
+	signal(SIGINT, handle_signal);
+
 	while (check)
 	{
 		input = prompt();
