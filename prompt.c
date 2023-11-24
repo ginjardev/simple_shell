@@ -21,13 +21,11 @@ char *prompt(void)
 	if (count == -1 || count == 0)
 	{
 		free(buffer);
-		free(prompt);
 		return (NULL);
 	}
 
 	if (count > 1 && buffer[count - 1] == '\n')
 		buffer[count - 1] = '\0';
-	free(prompt);
 
 	return (buffer);
 }
